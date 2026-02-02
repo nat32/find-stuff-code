@@ -1,0 +1,25 @@
+@use '@angular/material' as mat;
+
+// 1. Define your theme
+$theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0
+  ),
+));
+
+// 2. Apply the theme
+@include mat.all-component-themes($theme);
+
+// 3. Global body styling
+body {
+  color-scheme: light;
+  background-color: var(--mat-sys-surface);
+  color: var(--mat-sys-on-surface);
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+}

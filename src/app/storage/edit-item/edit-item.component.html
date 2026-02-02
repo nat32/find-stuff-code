@@ -1,0 +1,76 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Edit item</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="form" [formGroup]="myForm" (ngSubmit)="onSubmit()">
+      <!-- Name -->
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder="Ex: Jeans" />
+        <mat-error *ngIf="myForm.get('name')?.touched && myForm.get('name')?.hasError('required')">
+          Name is required
+        </mat-error>
+        <mat-error *ngIf="myForm.get('name')?.touched && myForm.get('name')?.hasError('maxlength')">
+          Name maximum length is 30 characters.
+        </mat-error>
+      </mat-form-field>
+      <!-- Location -->
+      <mat-form-field>
+        <mat-label>Location</mat-label>
+        <input matInput formControlName="location" placeholder="Ex: Dressing-room" />
+        <mat-error
+          *ngIf="myForm.get('location')?.touched && myForm.get('location')?.hasError('required')"
+        >
+          Location is required
+        </mat-error>
+        <mat-error
+          *ngIf="myForm.get('location')?.touched && myForm.get('location')?.hasError('maxlength')"
+        >
+          Location maximum length is 30 characters.
+        </mat-error>
+      </mat-form-field>
+      <!-- Section -->
+      <mat-form-field>
+        <mat-label>Section</mat-label>
+        <input matInput formControlName="section" placeholder="Ex: Dresser" />
+        <mat-error
+          *ngIf="myForm.get('section')?.touched && myForm.get('section')?.hasError('required')"
+        >
+          Section is required
+        </mat-error>
+        <mat-error
+          *ngIf="myForm.get('section')?.touched && myForm.get('section')?.hasError('maxlength')"
+        >
+          Section maximum length is 30 characters.
+        </mat-error>
+      </mat-form-field>
+      <!-- Container -->
+      <mat-form-field>
+        <mat-label>Container</mat-label>
+        <input matInput formControlName="container" placeholder="Ex: Second drawer on the left" />
+        <mat-error
+          *ngIf="myForm.get('container')?.touched && myForm.get('container')?.hasError('required')"
+        >
+          Container is required
+        </mat-error>
+        <mat-error
+          *ngIf="myForm.get('container')?.touched && myForm.get('container')?.hasError('maxlength')"
+        >
+          Container maximum length is 30 characters.
+        </mat-error>
+      </mat-form-field>
+      <!-- Description -->
+      <mat-form-field class="field-description">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" maxlength="150"></textarea>
+        <mat-hint>Description maximum length is 150 characters.</mat-hint>
+      </mat-form-field>
+
+      <!-- Submit Button -->
+      <button class="edit-button" matButton="filled" type="submit" [disabled]="myForm.invalid">
+        Edit Item
+      </button>
+    </form>
+  </mat-card-content>
+</mat-card>

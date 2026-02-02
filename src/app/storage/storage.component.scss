@@ -1,0 +1,51 @@
+.statistics-cards {
+  display: flex;
+  flex-direction: row;
+}
+
+.statistic-card {
+  width: 24%;
+  margin: 5px;
+  padding: 10px;
+}
+
+.mat-card {
+  margin: 20px;
+}
+
+.filter {
+  margin-top: 20px;
+}
+
+.actions-icon {
+  margin-right: 10px;
+}
+
+.color-view {
+  color: #565556;
+}
+
+.color-edit {
+  color: #1560bd;
+}
+
+.color-delete {
+  color: red;
+}
+
+.add-form {
+  margin-left: 20px;
+  margin-right: 20px;
+
+  .add-button {
+    margin-bottom: 20px;
+  }
+}
+
+.edit-form {
+  margin: 20px 20px;
+
+  .edit-button {
+    margin-bottom: 20px;
+  }
+}

@@ -1,0 +1,127 @@
+<div *ngIf="!itemsEmpty">
+  <div class="statistics-cards">
+    <mat-card class="mat-card statistic-card">
+      <mat-card-header>
+        <mat-card-title>Number of items</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>{{ total }}</mat-card-content>
+    </mat-card>
+    <mat-card class="mat-card statistic-card">
+      <mat-card-header>
+        <mat-card-title>Number of items in dressing-room</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>{{ totalDR }}</mat-card-content>
+    </mat-card>
+    <mat-card class="mat-card statistic-card">
+      <mat-card-header>
+        <mat-card-title>Number of items in garage</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>{{ totalGarage }}</mat-card-content>
+    </mat-card>
+    <mat-card class="mat-card statistic-card">
+      <mat-card-header>
+        <mat-card-title>Number of items in basement</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>{{ totalBasement }}</mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- Show Add Form Button -->
+  <div class="add-form">
+    <button class="add-button" matButton="filled" (click)="showAddForm()">
+      {{ addButtonText }}
+    </button>
+
+    <app-add-item *ngIf="isAddFormVisible" (newItemEvent)="addItem($event)"></app-add-item>
+  </div>
+
+  <mat-card appearance="outlined" class="mat-card">
+    <mat-card-header>
+      <mat-card-title>Listing All Of Items</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-form-field class="filter">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. jeans" #input />
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort>
+        <!-- IdColumn -->
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>No.</th>
+          <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+          <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+        </ng-container>
+
+        <!-- Location Column -->
+        <ng-container matColumnDef="location">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Location</th>
+          <td mat-cell *matCellDef="let element">{{ element.location }}</td>
+        </ng-container>
+
+        <!-- Section Column -->
+        <ng-container matColumnDef="section">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Section</th>
+          <td mat-cell *matCellDef="let element">{{ element.section }}</td>
+        </ng-container>
+
+        <!-- Container Column -->
+        <ng-container matColumnDef="container">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Container</th>
+          <td mat-cell *matCellDef="let element">{{ element.container }}</td>
+        </ng-container>
+
+        <!-- Description Column -->
+        <ng-container matColumnDef="description">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+          <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+        </ng-container>
+
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Actions</th>
+          <td mat-cell *matCellDef="let element">
+            <mat-icon
+              class="actions-icon color-edit"
+              (click)="clickToEditItem(element)"
+              fontIcon="edit"
+            ></mat-icon>
+
+            <mat-icon
+              class="actions-icon color-delete"
+              (click)="deleteItem(element.id)"
+              fontIcon="delete"
+            ></mat-icon>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+
+      <mat-paginator
+        [pageSizeOptions]="[10, 15, 20]"
+        showFirstLastButtons
+        aria-label="Select page of items"
+      >
+      </mat-paginator>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div id="edit-form" class="edit-form" *ngIf="isEditFormVisible">
+  <button class="edit-button" matButton="filled" (click)="closeEditItemForm()">
+    Close Edit Item Form
+  </button>
+
+  <app-edit-item
+    [itemToEdit]="currentItem"
+    [events]="eventsChangeSubject.asObservable()"
+    (editedItem)="editItem($event)"
+  ></app-edit-item>
+</div>
