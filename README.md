@@ -1,5 +1,7 @@
 # Find Stuff
 
+Description: Find-stuff est une application pour répertorier des affaires. En les ajoutant, il faut définir leur emplacement pour ensuite pouvoir filtrer la liste afin de les retrouver dans le tableau
+
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.
 
 ## Development server
